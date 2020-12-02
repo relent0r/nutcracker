@@ -204,12 +204,9 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'StartLocationNeedsEngineer', { 'LocationType', 1000, -1000, 0, 2, 'StructuresNotMex' } },
-         { SBC, 'EnemyInFactoryRange', { 'LocationType', true } },
-			
+            { SBC, 'EnemyInFactoryRange', { 'LocationType', true } },
 			{ SBC, 'NoRushTimeCheck', { 0 }},
 			{ SIBC, 'HaveGreaterThanUnitsWithCategory', { 1, categories.ENERGYPRODUCTION * categories.TECH3 } },
-            
-           
         },
         BuilderType = 'Any',
         BuilderData = {

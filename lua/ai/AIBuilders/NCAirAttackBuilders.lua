@@ -1,11 +1,11 @@
-#***************************************************************************
-#*
-#**  File     :  /lua/ai/SorianAirAttackBuilders.lua
-#**
-#**  Summary  : Default economic builders for skirmish
-#**
-#**  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
-#****************************************************************************
+--***************************************************************************
+--*
+--**  File     :  /lua/ai/SorianAirAttackBuilders.lua
+--**
+--**  Summary  : Default economic builders for skirmish
+--**
+--**  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--****************************************************************************
 
 local BBTmplFile = '/lua/basetemplates.lua'
 local BuildingTmpl = 'BuildingTemplates'
@@ -44,7 +44,7 @@ function AirAttackCondition(aiBrain, locationType, targetNumber )
     
     --local surfaceThreat = pool:GetPlatoonThreat( 'AntiSurface', categories.MOBILE * categories.AIR - categories.EXPERIMENTAL - categories.SCOUT - categories.INTELLIGENCE, position, radius )
 	local surfaceThreat = pool:GetPlatoonThreat( 'AntiSurface', categories.MOBILE * categories.AIR - categories.EXPERIMENTAL - categories.SCOUT - categories.INTELLIGENCE)
-    local airThreat = 0 #pool:GetPlatoonThreat( 'AntiAir', categories.MOBILE * categories.AIR - categories.EXPERIMENTAL - categories.SCOUT - categories.INTELLIGENCE, position, radius )
+    local airThreat = 0 pool:GetPlatoonThreat( 'AntiAir', categories.MOBILE * categories.AIR - categories.EXPERIMENTAL - categories.SCOUT - categories.INTELLIGENCE, position, radius )
     if ( surfaceThreat + airThreat ) >= targetNumber then
         return true
 	elseif UC.UnitCapCheckGreater(aiBrain, .95) then
@@ -230,36 +230,37 @@ BuilderGroup {
             },
         },
     },
-Builder {
-        BuilderName = 'NC finding enemy fighters late',
-        PlatoonTemplate = 'NCfighterhunterlate',
-		PlatoonAddBehaviors = { 'AirUnitRefitSorian' },
-		PlatoonAddPlans = { 'AirIntelToggle','DistressResponseAISorian'},
-        Priority = 300,
-        FormRadius = 300,
-        InstanceCount = 100,
-       
-        BuilderType = 'Any',
-        BuilderConditions = {
-                       
-                        { MIBC, 'GreaterThanGameTime', { 1320} },
-                        { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.MOBILE * categories.AIR * categories.ANTIAIR - categories.BOMBER - categories.GROUNDATTACK - categories.EXPERIMENTAL - categories.TRANSPORTFOCUS - categories.SCOUT } },
-			{ SBC, 'NoRushTimeCheck', { 0 }},
-        },
-        BuilderData = {
-			SearchRadius = 6000,
-			
-            PrioritizedCategories = {    
+    Builder {
+            BuilderName = 'NC finding enemy fighters late',
+            PlatoonTemplate = 'NCfighterhunterlate',
+            PlatoonAddBehaviors = { 'AirUnitRefitSorian' },
+            PlatoonAddPlans = { 'AirIntelToggle','DistressResponseAISorian'},
+            Priority = 300,
+            FormRadius = 300,
+            InstanceCount = 100,
+        
+            BuilderType = 'Any',
+            BuilderConditions = {
+                        
+                            { MIBC, 'GreaterThanGameTime', { 1320} },
+                            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.MOBILE * categories.AIR * categories.ANTIAIR - categories.BOMBER - categories.GROUNDATTACK - categories.EXPERIMENTAL - categories.TRANSPORTFOCUS - categories.SCOUT } },
+                { SBC, 'NoRushTimeCheck', { 0 }},
+            },
+            BuilderData = {
+                SearchRadius = 6000,
+                
+                PrioritizedCategories = {    
 
-                                'EXPERIMENTAL AIR',
-                                'TRANSPORTFOCUS',
-                                'AIR',
-                                
-				
-				
+                                    'EXPERIMENTAL AIR',
+                                    'TRANSPORTFOCUS',
+                                    'AIR',
+                                    
+                    
+                    
+                },
             },
         },
-    },
+}
 
     BuilderGroup {
         BuilderGroupName = 'NCt4airsnipebehavior',
